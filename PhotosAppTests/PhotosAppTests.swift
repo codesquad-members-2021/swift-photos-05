@@ -8,9 +8,4 @@
 import XCTest
 @testable import PhotosApp
 class PhotosAppTests: XCTestCase {
-
-    func testColor(){
-
-    }
-
 }
