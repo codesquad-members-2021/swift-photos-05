@@ -11,6 +11,7 @@ import PhotosUI
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var photoCollectionView: UICollectionView!
     var allOfPhotos : PHFetchResult<PHAsset>!
     let imageManager = PHCachingImageManager()
     
@@ -21,9 +22,8 @@ class ViewController: UIViewController {
         allOfPhotos = PHFetchResult()
         allOfPhotos = PHAsset.fetchAssets(with: nil)
         
+        PHPhotoLibrary.shared().register(self)
     }
-
-
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -35,10 +35,24 @@ extension ViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
         
-        imageManager.requestImage(for: allOfPhotos.object(at: indexPath.item), targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: nil, resultHandler: { uiimage, dict  in
+        imageManager.requestImage(for: allOfPhotos.object(at: indexPath.item), targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: nil, resultHandler: { uiimage, _  in
             cell.photoImage.image = uiimage
 
         })
         return cell
     }
+}
+
+extension ViewController: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        if let changed = changeInstance.changeDetails(for: allOfPhotos){
+            allOfPhotos = changed.fetchResultAfterChanges
+            
+            DispatchQueue.main.sync {
+                self.photoCollectionView.reloadData()
+            }
+        }
+    }
+    
+    
 }
