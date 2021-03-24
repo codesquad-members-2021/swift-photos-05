@@ -14,15 +14,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var photoCollectionView: UICollectionView!
     var allOfPhotos : PHFetchResult<PHAsset>!
     let imageManager = PHCachingImageManager()
+    var doodles = [DoodleJson]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         self.navigationItem.title = "Photos"
-        allOfPhotos = PHFetchResult()
         allOfPhotos = PHAsset.fetchAssets(with: nil)
         
         PHPhotoLibrary.shared().register(self)
+        loadJsonFile()
     }
 }
 
@@ -37,7 +38,6 @@ extension ViewController: UICollectionViewDataSource {
         
         imageManager.requestImage(for: allOfPhotos.object(at: indexPath.item), targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: nil, resultHandler: { uiimage, _  in
             cell.photoImage.image = uiimage
-
         })
         return cell
     }
@@ -53,6 +53,15 @@ extension ViewController: PHPhotoLibraryChangeObserver {
             }
         }
     }
-    
-    
+
+}
+
+extension ViewController {
+    func loadJsonFile() -> [DoodleJson] {
+        if let file = Bundle.main.url(forResource: "doodle", withExtension: "json") {
+            let data = try? Data(contentsOf: file)
+            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [Any]
+            
+        }
+    }
 }
