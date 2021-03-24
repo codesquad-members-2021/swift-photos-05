@@ -18,12 +18,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.navigationItem.title = "Doodles"
         allOfPhotos = PHAsset.fetchAssets(with: nil)
         
         PHPhotoLibrary.shared().register(self)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,13 +36,15 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
         let object = doodles[indexPath.item]
-        if let data: NSData = try? NSData.init(contentsOf: object.image){
-            cell.photoImage.image = UIImage.init(data: data as Data)
+        
+        DispatchQueue.main.async {
+            if let data: NSData = try? NSData.init(contentsOf: object.image){
+                cell.photoImage.image = UIImage.init(data: data as Data)
+            }
         }
-
         return cell
     }
 }
@@ -58,7 +59,6 @@ extension ViewController: PHPhotoLibraryChangeObserver {
             }
         }
     }
-
 }
 
 extension ViewController {
@@ -71,7 +71,7 @@ extension ViewController {
                 let title = parse["title"] as! String
                 let image = parse["image"] as! String
                 let date = parse["date"] as! String
-         
+                
                 let doodle = DoodleJson(title: title, image: DoodleJson.toURL(string: image)!, date: DoodleJson.toDate(string: date)!)
                 doodles.append(doodle)
             }
