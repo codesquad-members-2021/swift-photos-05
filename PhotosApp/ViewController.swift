@@ -66,7 +66,8 @@ extension ViewController {
                 let title = parse["title"] as! String
                 let image = parse["image"] as! String
                 let date = parse["date"] as! String
-                let doodle = DoodleJson(title: title, image: image, date: date)
+         
+                let doodle = DoodleJson(title: title, image: DoodleJson.toURL(string: image)!, date: DoodleJson.toDate(string: date)!)
                 doodles.append(doodle)
             }
         }
