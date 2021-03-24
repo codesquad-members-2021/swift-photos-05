@@ -57,11 +57,18 @@ extension ViewController: PHPhotoLibraryChangeObserver {
 }
 
 extension ViewController {
-    func loadJsonFile() -> [DoodleJson] {
+    func loadJsonFile() {
         if let file = Bundle.main.url(forResource: "doodle", withExtension: "json") {
             let data = try? Data(contentsOf: file)
             let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [Any]
-            
+            json?.forEach{ doodleObject in
+                let parse = doodleObject as! [String: Any]
+                let title = parse["title"] as! String
+                let image = parse["image"] as! String
+                let date = parse["date"] as! String
+                let doodle = DoodleJson(title: title, image: image, date: date)
+                doodles.append(doodle)
+            }
         }
     }
 }

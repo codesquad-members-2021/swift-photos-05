@@ -10,5 +10,5 @@ import Foundation
 struct DoodleJson {
     let title : String
     let image : String
-    let date : Date
+    let date : String
 }
