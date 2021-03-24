@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        self.navigationItem.title = "Photos"
+        self.navigationItem.title = "Doodles"
         allOfPhotos = PHAsset.fetchAssets(with: nil)
         
         PHPhotoLibrary.shared().register(self)
