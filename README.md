@@ -41,3 +41,23 @@ iOS 연습 - 5팀(Elly, V)
 ### 실행화면
 
 <img width="300" src = "https://user-images.githubusercontent.com/60323625/112099350-b6c47780-8be6-11eb-9a4c-f7f622e2caf7.png">
+
+
+
+## step3
+
+### 핵심기능
+
+- NavigationBar에 좌측 바버튼을 `+`버튼을 추가한다.
+- `https://public.codesquad.kr/jk/doodle.json` 주소 JSON 파일을 맥에 다운로드 받고, Xcode 프로젝트에 추가한다.
+- Bundle에서 doodle.json 파일을 읽어와서 스위프트 데이터 구조로 변환한다.
+- GCD 큐를 활용해서 동시에 최대한 효율적으로 여러 이미지를 다운로드 받아서 표시한다.
+  - 애플 프레임워크만 사용한다.
+  - 시리얼큐
+  - DispatchQueue.async() 
+
+
+
+### 실행화면
+
+<img width="300" src = "https://user-images.githubusercontent.com/60323625/112286740-f8305200-8cce-11eb-85db-3a690477f4eb.png">
