@@ -23,22 +23,27 @@ class ViewController: UIViewController {
         allOfPhotos = PHAsset.fetchAssets(with: nil)
         
         PHPhotoLibrary.shared().register(self)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadJsonFile()
     }
 }
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allOfPhotos.count
+        return doodles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
-        
-        imageManager.requestImage(for: allOfPhotos.object(at: indexPath.item), targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: nil, resultHandler: { uiimage, _  in
-            cell.photoImage.image = uiimage
-        })
+        let object = doodles[indexPath.item]
+        if let data: NSData = try? NSData.init(contentsOf: object.image){
+            cell.photoImage.image = UIImage.init(data: data as Data)
+        }
+
         return cell
     }
 }
