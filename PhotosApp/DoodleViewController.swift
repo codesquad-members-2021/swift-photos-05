@@ -7,84 +7,40 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
+private let reuseIdentifier = "doodleCell"
 class DoodleViewController: UICollectionViewController {
 
     var doodles = [DoodleJson]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Doodles"
+        self.collectionView.backgroundColor = .darkGray
+        
+        self.collectionView!.register(PhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        loadJsonFile()
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Colse", style: .plain, target: self, action: #selector(dismissView))
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return doodles.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCell
-        let object = doodles[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
+        let object = doodles[indexPath.row]
         
         DispatchQueue.main.async {
             if let data: NSData = try? NSData.init(contentsOf: object.image){
-                cell.photoImage.image = UIImage.init(data: data as Data)
+                let doodleView = UIImageView()
+                doodleView.image = UIImage.init(data: data as Data)
+                cell.photoImage = doodleView
             }
         }
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
+
 extension DoodleViewController {
     func loadJsonFile() {
         if let file = Bundle.main.url(forResource: "doodle", withExtension: "json") {
