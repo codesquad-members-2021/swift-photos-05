@@ -5,22 +5,18 @@
 //  Created by Elly on 2021/03/24.
 //
 
-import Foundation
+import UIKit
 
-struct DoodleJson {
+class DoodleVO {
     let title : String
-    let image : URL
+    let imageURL : URL
+    var image : UIImage?
     let date : Date
     
-    static func toDate(string : String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        
-        return dateFormatter.date(from: string)
-    }
-    
-    static func toURL(string: String) -> URL?{
-        return URL(string: string)
+    init(title : String, imageURL : URL, date : Date){
+        self.title = title
+        self.imageURL = imageURL
+        self.image = nil
+        self.date = date
     }
 }
