@@ -44,7 +44,6 @@ extension ViewController: UICollectionViewDataSource {
         
         imageManager.requestImage(for: allOfPhotos.object(at: indexPath.item), targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: nil, resultHandler: { uiimage, _  in
             cell.photoImage.image = uiimage
-            
         })
         return cell
     }

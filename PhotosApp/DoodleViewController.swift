@@ -9,7 +9,7 @@ import UIKit
 
 private let reuseIdentifier = "doodleCell"
 class DoodleViewController: UICollectionViewController {
-
+    
     var doodles = [DoodleJson]()
     
     override func viewDidLoad() {
@@ -18,24 +18,22 @@ class DoodleViewController: UICollectionViewController {
         self.collectionView.backgroundColor = .darkGray
         
         self.collectionView!.register(PhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        loadJsonFile()
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Colse", style: .plain, target: self, action: #selector(dismissView))
+        
+        DispatchQueue.global().async {
+            self.loadJsonFile()
+        }
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return doodles.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
-        let object = doodles[indexPath.row]
+        let doodle = doodles[indexPath.row]
         
-        DispatchQueue.main.async {
-            if let data: NSData = try? NSData.init(contentsOf: object.image){
-                let doodleView = UIImageView()
-                doodleView.image = UIImage.init(data: data as Data)
-                cell.photoImage = doodleView
-            }
+        if let data: NSData = try? NSData.init(contentsOf: doodle.image){
+            cell.photoImage.image = UIImage.init(data: data as Data)
         }
         return cell
     }
@@ -56,5 +54,13 @@ extension DoodleViewController {
                 doodles.append(doodle)
             }
         }
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
+extension DoodleViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 110, height: 50)
     }
 }
