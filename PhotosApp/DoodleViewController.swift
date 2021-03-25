@@ -41,19 +41,9 @@ class DoodleViewController: UICollectionViewController {
 
 extension DoodleViewController {
     func loadJsonFile() {
-        if let file = Bundle.main.url(forResource: "doodle", withExtension: "json") {
-            let data = try? Data(contentsOf: file)
-            let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [Any]
-            json?.forEach{ doodleObject in
-                let parse = doodleObject as! [String: Any]
-                let title = parse["title"] as! String
-                let image = parse["image"] as! String
-                let date = parse["date"] as! String
-                
-                let doodle = DoodleJson(title: title, image: DoodleJson.toURL(string: image)!, date: DoodleJson.toDate(string: date)!)
-                doodles.append(doodle)
-            }
-        }
+        let anyList = ImageManager.loadJsonFile(forResource: "doodle", withExension: "json")
+        doodles = ImageManager.jsonToDoodles(to: anyList!)
+    
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }

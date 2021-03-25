@@ -16,4 +16,25 @@ class ImageManager {
         }
         return nil
     }
+    
+    static func jsonToDoodles(to list : [Any]) -> [DoodleJson] {
+        var doodles = [DoodleJson]()
+        
+        list.forEach{ doodle in
+            let object = jsonToDoodle(from: doodle)!
+            doodles.append(object)
+        }
+        return doodles
+    }
+    
+    static func jsonToDoodle(from object: Any) -> DoodleJson? {
+        guard let parse = object as? [String: Any] else { return nil }
+        guard let title = parse["title"] as? String,
+              let image = parse["image"] as? String,
+              let date = parse["date"] as? String
+        else { return nil }
+        
+        let doodle = DoodleJson(title: title, image: DoodleJson.toURL(string: image)!, date: DoodleJson.toDate(string: date)!)
+        return doodle
+    }
 }
