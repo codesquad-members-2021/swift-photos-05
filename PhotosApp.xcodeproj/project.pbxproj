@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1052A50126098A0C008AB8D7 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1052A50026098A0C008AB8D7 /* PhotoCell.swift */; };
+		10D495A1260C32180095280C /* DoodleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D495A0260C32180095280C /* DoodleViewController.swift */; };
 		10F2EBEF260B17C700DBEC0A /* doodle.json in Resources */ = {isa = PBXBuildFile; fileRef = 10F2EBEE260B17C700DBEC0A /* doodle.json */; };
 		10F2EBF3260B18DC00DBEC0A /* DoodleJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2EBF2260B18DB00DBEC0A /* DoodleJson.swift */; };
 		769B36162608663200A747F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769B36152608663200A747F5 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1052A50026098A0C008AB8D7 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		10D495A0260C32180095280C /* DoodleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoodleViewController.swift; sourceTree = "<group>"; };
 		10F2EBEE260B17C700DBEC0A /* doodle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = doodle.json; sourceTree = "<group>"; };
 		10F2EBF2260B18DB00DBEC0A /* DoodleJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoodleJson.swift; sourceTree = "<group>"; };
 		769B36122608663200A747F5 /* PhotosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 				769B363B26087EAB00A747F5 /* UIColorExtension.swift */,
 				1052A50026098A0C008AB8D7 /* PhotoCell.swift */,
 				10F2EBF2260B18DB00DBEC0A /* DoodleJson.swift */,
+				10D495A0260C32180095280C /* DoodleViewController.swift */,
 			);
 			path = PhotosApp;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				769B361A2608663200A747F5 /* ViewController.swift in Sources */,
 				1052A50126098A0C008AB8D7 /* PhotoCell.swift in Sources */,
 				769B36162608663200A747F5 /* AppDelegate.swift in Sources */,
+				10D495A1260C32180095280C /* DoodleViewController.swift in Sources */,
 				769B36182608663200A747F5 /* SceneDelegate.swift in Sources */,
 				769B363C26087EAB00A747F5 /* UIColorExtension.swift in Sources */,
 			);

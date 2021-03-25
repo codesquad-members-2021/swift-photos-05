@@ -62,7 +62,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pYs-v7-jPN">
-                        <barButtonItem key="leftBarButtonItem" title="+" id="maA-PL-Bv9"/>
+                        <barButtonItem key="leftBarButtonItem" title="+" id="maA-PL-Bv9">
+                            <connections>
+                                <action selector="didTouchAddButton:" destination="BYZ-38-t0r" id="Uuk-3k-HwS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="photoCollectionView" destination="gcE-9Q-W7Q" id="p4W-lr-gtO"/>
@@ -71,6 +75,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="108.48214285714285"/>
+        </scene>
+        <!--Doodle View Controller-->
+        <scene sceneID="KcL-dg-xe7">
+            <objects>
+                <collectionViewController storyboardIdentifier="DoodleViewController" id="f9O-p4-idQ" customClass="DoodleViewController" customModule="PhotosApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="zKe-g8-T6L">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S4F-fr-nXL">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BFu-r3-xT6">
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6de-R2-x6t">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="f9O-p4-idQ" id="BKR-xf-A9O"/>
+                            <outlet property="delegate" destination="f9O-p4-idQ" id="FWP-5f-ifl"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q2V-4U-ysf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1894" y="108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zjn-zp-zHO">
