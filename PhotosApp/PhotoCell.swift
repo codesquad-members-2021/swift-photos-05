@@ -23,10 +23,11 @@ class PhotoCell: UICollectionViewCell {
     func configure(){
         self.addSubview(photoImage)
         photoImage.translatesAutoresizingMaskIntoConstraints = false
-        photoImage.contentMode = .scaleAspectFill
         photoImage.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         photoImage.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         photoImage.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         photoImage.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     }
+    
+    override var canBecomeFirstResponder: Bool{return true}
 }
