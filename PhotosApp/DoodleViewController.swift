@@ -18,12 +18,13 @@ class DoodleViewController: UICollectionViewController {
         self.collectionView.delegate = self
         self.navigationItem.title = "Doodles"
         self.collectionView.backgroundColor = .darkGray
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Colse", style: .plain, target: self, action: #selector(dismissView))
-        
         self.collectionView!.register(PhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
         DispatchQueue.global().async {
             self.loadJson()
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Colse", style: .plain, target: self, action: #selector(dismissView))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
