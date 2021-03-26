@@ -18,6 +18,7 @@ class DoodleViewController: UICollectionViewController {
         self.collectionView.delegate = self
         self.navigationItem.title = "Doodles"
         self.collectionView.backgroundColor = .darkGray
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Colse", style: .plain, target: self, action: #selector(dismissView))
         
         self.collectionView!.register(PhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         DispatchQueue.global().async {
@@ -57,6 +58,7 @@ extension DoodleViewController {
         }
     }
 }
+
 extension DoodleViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 110, height: 50)
@@ -64,6 +66,12 @@ extension DoodleViewController : UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         NSLog("clicked")
+    }
+}
+
+extension DoodleViewController {
+    @objc func dismissView(){
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
