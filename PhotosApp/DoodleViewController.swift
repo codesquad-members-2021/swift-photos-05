@@ -36,6 +36,12 @@ class DoodleViewController: UICollectionViewController {
         DispatchQueue.main.async {
             cell.photoImage.image = self.getImage(index: indexPath.row)
         }
+        
+        cell.photoImage.isUserInteractionEnabled = true
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        longPressRecognizer.minimumPressDuration = 1.0
+        longPressRecognizer.isEnabled = true
+        cell.photoImage.addGestureRecognizer(longPressRecognizer)
         return cell
     }
 }
@@ -73,6 +79,30 @@ extension DoodleViewController : UICollectionViewDelegateFlowLayout {
 extension DoodleViewController {
     @objc func dismissView(){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        let view = self.collectionView
+        let touchedItem = sender.location(in: view)
+        guard let indexPath = view?.indexPathForItem(at: touchedItem) else { return }
+        guard let cell = view?.cellForItem(at: indexPath) as? PhotoCell else { return }
+        
+        if let safeImage = cell.photoImage.image {
+            cell.becomeFirstResponder()
+            showMenuItem(target: cell)
+        }
+        
+    }
+    
+    func showMenuItem(target: UICollectionViewCell) {
+        self.collectionView.becomeFirstResponder()
+        let menuItem = UIMenuItem(title: "Save", action: #selector(saveImage))
+        UIMenuController.shared.menuItems = [menuItem]
+        UIMenuController.shared.showMenu(from: target, rect: target.frame)
+     }
+    
+    @objc func saveImage(){
+        print("save")
     }
 }
 
